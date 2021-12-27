@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
 //        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, items );
 //        listView.setAdapter(adapter);
 
-////        CustomAdapter customAdapter = new CustomAdapter();
-////        listView.setAdapter(customAdapter);
+        CustomAdapter customAdapter = new CustomAdapter();
+        listView.setAdapter(customAdapter);
     }
 
     class CustomAdapter extends BaseAdapter{
