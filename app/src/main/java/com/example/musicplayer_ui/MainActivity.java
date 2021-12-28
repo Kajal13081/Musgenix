@@ -3,11 +3,11 @@ package com.example.musicplayer_ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,13 +32,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listView);
+        storagePermission();
+    }
 
+    public void storagePermission(){
         Dexter.withContext(this)
-                .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-
                         // runtime permission given to store songs from external storage to app
                         displaySongs();
                     }
@@ -56,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .check();
     }
-
     // returns mp3 file from a folder
     public ArrayList<File> fetchMusic(File file) {
         ArrayList<File> arrayList = new ArrayList<>();
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     arrayList.addAll(fetchMusic(myFile));
                 }
                 else{
-                    if(myFile.getName().endsWith(".mp3") && !myFile.getName().startsWith(".")){
+                    if(myFile.getName().endsWith(".mp3")){
                         arrayList.add(myFile);
                     }
                 }
@@ -77,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displaySongs(){
-
         ArrayList<File> myMusic = fetchMusic(Environment.getExternalStorageDirectory());
         items = new String[myMusic.size()];
         for(int i=0; i< myMusic.size();i++){
@@ -86,12 +86,11 @@ public class MainActivity extends AppCompatActivity {
 //        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, items );
 //        listView.setAdapter(adapter);
 
-////        CustomAdapter customAdapter = new CustomAdapter();
-////        listView.setAdapter(customAdapter);
+        CustomAdapter customAdapter = new CustomAdapter();
+        listView.setAdapter(customAdapter);
     }
 
     class CustomAdapter extends BaseAdapter{
-
         @Override
         public int getCount() {
             return items.length;
@@ -109,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.music_item, null);
-            TextView musicText = findViewById(R.id.music_name);
+            @SuppressLint("ViewHolder") View view = getLayoutInflater().inflate(R.layout.music_item, null);
+            TextView musicText = view.findViewById(R.id.music_name);
             musicText.setSelected(true);
             musicText.setText(items[position]);
             return view;
