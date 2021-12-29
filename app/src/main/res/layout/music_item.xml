@@ -10,6 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/musicItemLayout"
         android:background="@drawable/item_bg"
         android:padding="10dp"
         android:elevation="10dp">
@@ -26,23 +27,38 @@
             android:layout_alignParentTop="true"/>
 
         <TextView
+            android:id="@+id/music_name"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:id="@+id/music_name"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:text="Music Name"
-            android:textSize="18sp"
-            android:singleLine="true"
-            android:layout_centerInParent="true"
-            android:marqueeRepeatLimit="marquee_forever"
+            android:layout_toEndOf="@id/music_icon"
             android:ellipsize="marquee"
             android:fontFamily="sans-serif-medium"
-            android:layout_toEndOf="@id/music_icon"
-            android:scrollHorizontally="true"/>
+            android:marqueeRepeatLimit="marquee_forever"
+            android:padding="8dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="Music Name"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/music_duration"
+            android:layout_gravity="end"
+            android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif"
+            android:maxLines="1"
+            android:text="03.50 min"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:paddingEnd="10dp"/>
+
 
     </RelativeLayout>
 
