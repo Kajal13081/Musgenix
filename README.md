@@ -11,7 +11,8 @@ The app is in progress.
 - Android Studio
 - Java
 - Firebase
-- basic Git skills are too:)
+- basic Git skills too:)
+
 
 
 
