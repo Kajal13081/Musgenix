@@ -30,7 +30,7 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.music_item, parent, false);
         return new SongViewHolder(view);
@@ -50,7 +50,8 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         //album art
         Uri albumArtUri = song.getAlbumArtUri();
         if (albumArtUri != null){
-            viewHolder.albumArtHolder.setImageURI(albumArtUri);
+            viewHolder.albumArtHolder.setImageURI(null);
+            viewHolder.albumArtHolder.setImageURI(null);
 
             if (viewHolder.albumArtHolder.getDrawable() == null){   // if that album has nothing, then we use the default album
                 viewHolder.albumArtHolder.setImageResource(R.drawable.ic_music);
