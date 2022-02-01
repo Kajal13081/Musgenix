@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/drawable/ic_music.xml" value="0.2703125" />
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/drawable/item_bg.xml" value="0.2703125" />
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/layout/activity_main.xml" value="0.22056159420289856" />
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/layout/list_of_files.xml" value="0.22056159420289856" />
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/layout/music_item.xml" value="0.22056159420289856" />
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/layout/search_fragment.xml" value="0.19746376811594202" />
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/layout/search_widget.xml" value="0.192481884057971" />
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/layout/searched_songs_layout.xml" value="0.19746376811594202" />
+        <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/menu/fragment_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/MusicPlayer_UI/app/src/main/res/drawable/item_bg.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/MusicPlayer_UI/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/MusicPlayer_UI/app/src/main/res/layout/music_item.xml" value="0.18645833333333334" />
