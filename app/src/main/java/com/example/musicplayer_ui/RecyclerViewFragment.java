@@ -46,6 +46,7 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
     }
 @Override
@@ -150,9 +151,9 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);
-        inflater.inflate(R.menu.fragment_menu,menu);
-        MenuItem item=menu.findItem(R.id.search_action);
-        View view= MenuItemCompat.getActionView((item));
+//        inflater.inflate(R.menu.fragment_menu,menu);
+//        MenuItem item=menu.findItem(R.id.search_action);
+//        View view= MenuItemCompat.getActionView((item));
 
 
     }
@@ -161,6 +162,7 @@ public class RecyclerViewFragment extends Fragment {
 
         return true;
     }
+
     private void displaySongs(List<Songs> songs) {
         // layout manager
         //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
