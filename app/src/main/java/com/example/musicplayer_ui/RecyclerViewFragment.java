@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer_ui.adapter.SongsAdapter;
-import com.example.musicplayer_ui.model.SearchFragment;
+//import com.example.musicplayer_ui.model.SearchFragment;
 import com.example.musicplayer_ui.model.Songs;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
