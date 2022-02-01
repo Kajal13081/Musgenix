@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:background="#190033"
     tools:context=".MainActivity">
+
     <FrameLayout
+        android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_holder"/>
+        android:layout_height="match_parent" />
 
 
 </RelativeLayout>
