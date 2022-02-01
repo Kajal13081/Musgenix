@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Musgenix/Musgenix/app/src/main/res/layout/activity_main.xml" value="0.36102564102564105" />
+        <entry key="..\:/Musgenix/Musgenix/app/src/main/res/layout/activity_splash_screen.xml" value="0.33" />
+        <entry key="..\:/Musgenix/Musgenix/app/src/main/res/layout/music_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/drawable/ic_music.xml" value="0.2703125" />
         <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/drawable/item_bg.xml" value="0.2703125" />
         <entry key="..\:/Users/Parteek/AndroidStudioProjects/Musgenix/app/src/main/res/layout/activity_main.xml" value="0.22056159420289856" />
