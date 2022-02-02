@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreenActivity">
+    tools:context=".SplashScreenActivity"
+    android:background="@color/white">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/logo"
@@ -25,12 +26,11 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="44dp"
-        android:fontFamily="@font/lato_bold"
+        android:fontFamily="@font/lato"
         android:gravity="center"
         android:text="Musgenix"
-        android:textColor="#190033"
+        android:textColor="#214158"
         android:textSize="20dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logo"
         app:layout_constraintStart_toStartOf="@+id/logo"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
@@ -41,7 +41,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/lato_bold"
         android:gravity="center"
-        android:textColor="#190033"
+        android:textColor="#214158"
         android:text="Android Music Player"
         android:textSize="16dp"
         android:textStyle="bold"
