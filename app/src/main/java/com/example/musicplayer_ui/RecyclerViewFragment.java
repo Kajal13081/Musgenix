@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ public class RecyclerViewFragment extends Fragment {
     RecyclerView mRecyclerView;
     SongsAdapter mSongsAdapter;
     ArrayList<String> sendSongs=new ArrayList<>();
+    List<Songs> modifyList=new ArrayList<>();
     private static final String TAG="RecyclerViewFragment";
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -137,9 +139,11 @@ public class RecyclerViewFragment extends Fragment {
             }
 
             // display songs in recyclerView
-            displaySongs(songs);
-            for(int i=0;i<songs.size();i++)
-                sendSongs.add(songs.get(i).getName());
+            //displaySongs(songs);
+            modifyList=songs;
+            modifySongsList(songs,1);
+//            for(int i=0;i<songs.size();i++)
+//                sendSongs.add(songs.get(i).getName());
             // Number of songs available
             for(int i=0;i<songs.size();i++){
                 Log.d(TAG,"!!!!!! "+songs.get(i).getName()+"  ??"+songs.get(i).getAlbumArtUri());
@@ -151,14 +155,29 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);
-//        inflater.inflate(R.menu.fragment_menu,menu);
-//        MenuItem item=menu.findItem(R.id.search_action);
-//        View view= MenuItemCompat.getActionView((item));
+        inflater.inflate(R.menu.fragment_menu,menu);
+        MenuItem item=menu.findItem(R.id.three_dots);
 
 
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+
+        switch(item.getItemId()){
+
+            case R.id.item1:
+                modifySongsList(modifyList,1);
+                break;
+
+            case R.id.item2:
+                modifySongsList(modifyList,2);
+                break;
+
+            case R.id.item3:
+                modifySongsList(modifyList,3);
+                break;
+
+        }
 
         return true;
     }
@@ -172,6 +191,44 @@ public class RecyclerViewFragment extends Fragment {
         mSongsAdapter = new SongsAdapter(songs);
         mRecyclerView.setAdapter(mSongsAdapter);
 
+    }
+    public void modifySongsList(List<Songs> modifySongs,int sort){
+        Songs swapSong;
+        if(sort==1){
+            for(int i=0;i<modifySongs.size();i++){
+                for(int j=i+1;j<modifySongs.size();j++){
+                    if(modifySongs.get(j).getName().compareToIgnoreCase(modifySongs.get(i).getName())<0){
+                        swapSong=modifySongs.get(j);
+                        modifySongs.set(j,modifySongs.get(i));
+                        modifySongs.set(i,swapSong);
+                    }
+                }
+            }
+        }
+        else if(sort==2){
+            for(int i=0;i<modifySongs.size();i++){
+                for(int j=i+1;j<modifySongs.size();j++){
+                    if(modifySongs.get(j).getName().compareToIgnoreCase(modifySongs.get(i).getName())>0){
+                        swapSong=modifySongs.get(j);
+                        modifySongs.set(j,modifySongs.get(i));
+                        modifySongs.set(i,swapSong);
+                    }
+                }
+            }
+        }
+        else{
+            for(int i=0;i<modifySongs.size();i++){
+                for(int j=i+1;j<modifySongs.size();j++){
+                    if(modifySongs.get(j).getDuration()<modifySongs.get(i).getDuration()){
+                        swapSong=modifySongs.get(j);
+                        modifySongs.set(j,modifySongs.get(i));
+                        modifySongs.set(i,swapSong);
+                    }
+                }
+            }
+        }
+
+        displaySongs(modifySongs);
     }
     @Override
     public void onStop(){
