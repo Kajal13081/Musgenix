@@ -42,7 +42,6 @@ import java.util.List;
 public class RecyclerViewFragment extends Fragment {
     RecyclerView mRecyclerView;
     SongsAdapter mSongsAdapter;
-    private boolean sortZtoA=true;
     ArrayList<String> sendSongs=new ArrayList<>();
     List<Songs> modifyList=new ArrayList<>();
     private static final String TAG="RecyclerViewFragment";
@@ -159,13 +158,6 @@ public class RecyclerViewFragment extends Fragment {
         inflater.inflate(R.menu.fragment_menu,menu);
         MenuItem item=menu.findItem(R.id.three_dots);
 
-        //View view= MenuItemCompat.getActionView((item));
-//        if(sortZtoA){
-//            item.setTitle("Sort Z-A");
-//        }
-//        else{
-//            item.setTitle("Sort A-Z");
-//        }
 
     }
     @Override
