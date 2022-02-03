@@ -1,7 +1,14 @@
 package com.example.musicplayer_ui.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.RingtoneManager;
 import android.net.Uri;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.musicplayer_ui.R;
 import com.example.musicplayer_ui.model.Songs;
 
+import java.io.File;
 import java.util.List;
 
 public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -69,6 +77,47 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             }
         });
+
+        // OnClickListener for the settings button
+        viewHolder.settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Check if permissions for writing settings have been granted, otherwise ask for permissions
+                if(!Settings.System.canWrite(view.getContext()))
+                {
+                    Intent intent=new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                    intent.setData(Uri.parse("package:"+view.getContext().getPackageName()));
+                    view.getContext().startActivity(intent);
+                }
+                // Display dialog box with options for setting song as ringtone or alarm tone
+                new AlertDialog.Builder(view.getContext()).setTitle("Set song as...").setItems(new String[]{"Ringtone", "Alarm tone"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Check if permissions have been granted
+                        if(!Settings.System.canWrite(view.getContext()))
+                        {
+                            Toast.makeText(view.getContext(), "Permissions not granted", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        switch (i)
+                        {
+                            // Setting song as ringtone
+                            case 0:
+                                RingtoneManager.setActualDefaultRingtoneUri(view.getContext(), RingtoneManager.TYPE_RINGTONE,song.getUri());
+                                Toast.makeText(view.getContext(), "Song set as ringtone", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            // Setting song as alarm tone
+                            case 1:
+                                RingtoneManager.setActualDefaultRingtoneUri(view.getContext(), RingtoneManager.TYPE_ALARM,song.getUri());
+                                Settings.System.putString(view.getContext().getContentResolver(),Settings.System.ALARM_ALERT,song.getUri().toString());
+                                Toast.makeText(view.getContext(), "Song set as alarm tone", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                }).show();
+            }
+        });
     }
 
     @Override
@@ -81,7 +130,7 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         // member variables
         RelativeLayout musicItemLayout;
-        ImageView albumArtHolder;
+        ImageView albumArtHolder,settingsButton;
         TextView titleHolder, durationHolder;
 
         public SongViewHolder(@NonNull View itemView) {
@@ -90,6 +139,7 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             albumArtHolder = itemView.findViewById(R.id.music_icon);
             titleHolder = itemView.findViewById(R.id.music_name);
             durationHolder = itemView.findViewById(R.id.music_duration);
+            settingsButton = itemView.findViewById(R.id.settings_img);
         }
     }
 
