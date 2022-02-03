@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MusicPlayer_UI" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MusicPlayer_UI" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#1D56E2</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
