@@ -7,11 +7,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/applogo2"
+        android:icon="@mipmap/finallogo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicPlayer_UI"
-        android:roundIcon="@mipmap/applogo2_round">
+        android:roundIcon="@mipmap/finallogo_round">
         <activity
             android:name=".MainActivity"
             android:exported="true">
