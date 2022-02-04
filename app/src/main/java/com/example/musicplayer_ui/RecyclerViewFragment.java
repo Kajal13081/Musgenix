@@ -101,6 +101,7 @@ public class RecyclerViewFragment extends Fragment {
                 MediaStore.Audio.Media.DISPLAY_NAME, // song name
                 MediaStore.Audio.Media.DURATION, // song duration
                 MediaStore.Audio.Media.ALBUM_ID, // song image
+                MediaStore.Audio.Media.DATA,
         };
 
         // sort order of songs
@@ -114,7 +115,8 @@ public class RecyclerViewFragment extends Fragment {
             int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME);
             int durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
             int albumIdColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID);
-
+            // taking path index
+            int path=cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
             //getting the values from cursor indices
             while (cursor.moveToNext()) {
                 //get values of columns for a give audio file
@@ -122,7 +124,8 @@ public class RecyclerViewFragment extends Fragment {
                 String name = cursor.getString(nameColumn);
                 int duration = cursor.getInt(durationColumn);
                 long albumId = cursor.getLong(albumIdColumn);
-
+                // storing path to string
+                String songPath=cursor.getString(path);
                 //song uri
                 Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
 
@@ -133,7 +136,7 @@ public class RecyclerViewFragment extends Fragment {
                 name = name.substring(0, name.lastIndexOf("."));
 
                 // get songs item from model class
-                Songs song = new Songs(id, uri, name, duration, albumId, albumArtUri);
+                Songs song = new Songs(id, uri, name, duration, albumId, albumArtUri,songPath);
                 // add songs to song Arraylist
                 songs.add(song);
             }

@@ -5,10 +5,13 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +33,7 @@ import java.util.List;
 public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<Songs> songs;
-
+    private static final String TAG="SongsAdapter";
     // constructor
     public SongsAdapter(List<Songs> songs) {
         this.songs = songs;
@@ -73,6 +76,7 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         viewHolder.musicItemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                playAudio(songs.get(holder.getAdapterPosition()).getPath());
                 Toast.makeText(v.getContext(), " Song Selected: " + song.getName(), Toast.LENGTH_LONG).show();
 
             }
@@ -155,6 +159,19 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             totalDurationText = String.format("%1d:%02d:%02d", hrs, min, secs);
         }
         return  totalDurationText;
+    }
+    public void playAudio(String songName){
+        Log.d(TAG,"}}}}}}}}}}}}}}}}"+songName);
+        MediaPlayer mp=new MediaPlayer();
+        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try{
+            mp.setDataSource(songName);
+            mp.prepare();
+            mp.start();
+        }catch(Exception ex){
+            ex.printStackTrace();
+
+        }
     }
 
 }
