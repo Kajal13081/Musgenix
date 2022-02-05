@@ -3,6 +3,7 @@ package com.example.musicplayer_ui;
 import android.Manifest;
 import android.content.ContentUris;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,15 +21,18 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer_ui.adapter.SongsAdapter;
 //import com.example.musicplayer_ui.model.SearchFragment;
 import com.example.musicplayer_ui.model.Songs;
+import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -42,6 +46,7 @@ import java.util.List;
 public class RecyclerViewFragment extends Fragment {
     RecyclerView mRecyclerView;
     SongsAdapter mSongsAdapter;
+
     ArrayList<String> sendSongs=new ArrayList<>();
     List<Songs> modifyList=new ArrayList<>();
     private static final String TAG="RecyclerViewFragment";
@@ -93,7 +98,7 @@ public class RecyclerViewFragment extends Fragment {
         }else {
             songLibraryUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         }
-
+//        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
         // projection : what do i need to select from media store, because media store is a collection of database/tables which have media items in user's device
         // basically what i need from user's device
         String[] projection = new String[]{
@@ -193,6 +198,7 @@ public class RecyclerViewFragment extends Fragment {
         // adapter
         mSongsAdapter = new SongsAdapter(songs);
         mRecyclerView.setAdapter(mSongsAdapter);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
     }
     public void modifySongsList(List<Songs> modifySongs,int sort){
@@ -243,4 +249,23 @@ public class RecyclerViewFragment extends Fragment {
     super.onDestroyView();
         //getActivity().finishAffinity();
     }
+    //Feature to delete any Songs
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            modifyList.remove(viewHolder.getAdapterPosition());
+            mSongsAdapter.notifyDataSetChanged();
+
+            Snackbar snackbar = Snackbar.make(mRecyclerView, "Item was removed from the list.", Snackbar.LENGTH_LONG);
+            snackbar.setActionTextColor(Color.YELLOW);
+            snackbar.show();
+
+        }
+
+    };
 }
