@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer_ui.R;
@@ -94,7 +96,7 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     view.getContext().startActivity(intent);
                 }
                 // Display dialog box with options for setting song as ringtone or alarm tone
-                new AlertDialog.Builder(view.getContext()).setTitle("Set song as...").setItems(new String[]{"Ringtone", "Alarm tone"}, new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(view.getContext()).setTitle("Song Options").setItems(new String[]{"Set as Ringtone", "Set as Alarm tone", "Share Song"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Check if permissions have been granted
@@ -116,6 +118,20 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                                 RingtoneManager.setActualDefaultRingtoneUri(view.getContext(), RingtoneManager.TYPE_ALARM,song.getUri());
                                 Settings.System.putString(view.getContext().getContentResolver(),Settings.System.ALARM_ALERT,song.getUri().toString());
                                 Toast.makeText(view.getContext(), "Song set as alarm tone", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 2:
+                            //  Share feature to share audio files to other apps
+                                String songPath = songs.get(holder.getAdapterPosition()).getPath();
+                                File file = new File(songPath);
+                                    Toast.makeText(view.getContext(), songPath, Toast.LENGTH_LONG).show();
+                                    Intent share = new Intent(Intent.ACTION_SEND);
+                                    Uri content = FileProvider.getUriForFile(view.getContext(), "com.example.musicplayer_ui", file);
+                                    share.putExtra(Intent.EXTRA_STREAM, content);
+                                    share.setType("audio/*");
+                                    share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                    share.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                                    share.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                                    view.getContext().startActivity(Intent.createChooser(share, "Share song to"));
                                 break;
                         }
                     }
