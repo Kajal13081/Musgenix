@@ -196,7 +196,7 @@ public class RecyclerViewFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // adapter
-        mSongsAdapter = new SongsAdapter(songs);
+        mSongsAdapter = new SongsAdapter(getContext(), songs); //added context
         mRecyclerView.setAdapter(mSongsAdapter);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
