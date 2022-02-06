@@ -3,6 +3,7 @@ package com.example.musicplayer_ui;
 import android.Manifest;
 import android.content.ContentUris;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,17 +13,24 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer_ui.adapter.SongsAdapter;
 //import com.example.musicplayer_ui.model.SearchFragment;
 import com.example.musicplayer_ui.model.Songs;
+import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -36,6 +44,8 @@ import java.util.List;
 public class RecyclerViewFragment extends Fragment {
     RecyclerView mRecyclerView;
     SongsAdapter mSongsAdapter;
+
+    //ArrayList<String> sendSongs=new ArrayList<>();
     List<Songs> modifyList=new ArrayList<>();
     public static boolean flag=false;
     private static final String TAG="RecyclerViewFragment";
@@ -47,7 +57,6 @@ public class RecyclerViewFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
-
     }
 @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -186,12 +195,13 @@ public class RecyclerViewFragment extends Fragment {
 
     private void displaySongs(List<Songs> songs) {
         // layout manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // adapter
         mSongsAdapter = new SongsAdapter(songs);
         mRecyclerView.setAdapter(mSongsAdapter);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
     }
     public void modifySongsList(List<Songs> modifySongs,int sort){
@@ -234,7 +244,6 @@ public class RecyclerViewFragment extends Fragment {
     }
     @Override
     public void onStop(){
-
         super.onStop();
 //        if(flag!=true)
 //        getActivity().finishAffinity();
@@ -244,4 +253,23 @@ public class RecyclerViewFragment extends Fragment {
     super.onDestroyView();
         //getActivity().finishAffinity();
     }
+    //Feature to delete any Songs
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            modifyList.remove(viewHolder.getAdapterPosition());
+            mSongsAdapter.notifyDataSetChanged();
+
+            Snackbar snackbar = Snackbar.make(mRecyclerView, "Item was removed from the list.", Snackbar.LENGTH_LONG);
+            snackbar.setActionTextColor(Color.YELLOW);
+            snackbar.show();
+
+        }
+
+    };
 }
