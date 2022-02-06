@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,7 +47,7 @@ public class RecyclerViewFragment extends Fragment {
     RecyclerView mRecyclerView;
     SongsAdapter mSongsAdapter;
 
-    //ArrayList<String> sendSongs=new ArrayList<>();
+    ArrayList<String> sendSongs=new ArrayList<>();
     List<Songs> modifyList=new ArrayList<>();
     public static boolean flag=false;
     private static final String TAG="RecyclerViewFragment";
@@ -101,7 +103,7 @@ public class RecyclerViewFragment extends Fragment {
         }else {
             songLibraryUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         }
-
+//        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
         // projection : what do i need to select from media store, because media store is a collection of database/tables which have media items in user's device
         // basically what i need from user's device
         String[] projection = new String[]{
@@ -195,11 +197,11 @@ public class RecyclerViewFragment extends Fragment {
 
     private void displaySongs(List<Songs> songs) {
         // layout manager
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // adapter
-        mSongsAdapter = new SongsAdapter(songs);
+        mSongsAdapter = new SongsAdapter(getContext(), songs); //added context
         mRecyclerView.setAdapter(mSongsAdapter);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
@@ -245,8 +247,7 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onStop(){
         super.onStop();
-//        if(flag!=true)
-//        getActivity().finishAffinity();
+        //getActivity().finishAffinity();
     }
     @Override
     public void onDestroyView(){

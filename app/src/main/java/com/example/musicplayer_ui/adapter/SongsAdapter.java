@@ -3,9 +3,11 @@ package com.example.musicplayer_ui.adapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -26,6 +28,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.musicplayer_ui.R;
 import com.example.musicplayer_ui.model.Songs;
 
@@ -35,10 +38,12 @@ import java.util.List;
 public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<Songs> songs;
+    private Context context;
     private static final String TAG="SongsAdapter";
     // constructor
-    public SongsAdapter(List<Songs> songs) {
+    public SongsAdapter(Context context, List<Songs> songs) {
         this.songs = songs;
+        this.context = context;
     }
 
     @NonNull
@@ -61,17 +66,15 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         viewHolder.durationHolder.setText(getDuration(song.getDuration()));
 
         //album art
-        Uri albumArtUri = song.getAlbumArtUri();
-        if (albumArtUri != null){
-            viewHolder.albumArtHolder.setImageURI(null);
-            viewHolder.albumArtHolder.setImageURI(null);
-
-            if (viewHolder.albumArtHolder.getDrawable() == null){   // if that album has nothing, then we use the default album
-                viewHolder.albumArtHolder.setImageResource(R.drawable.ic_music);
-            }
-        }
-        else {
-            viewHolder.albumArtHolder.setImageResource(R.drawable.ic_music);
+        byte[] image = getAlbumArt(songs.get(position).getPath()); //get is Album art as Byte Array
+        if (image==null) { //if array is null, it means, no such Album art is found
+            viewHolder.albumArtHolder.setImageResource(R.drawable.music); //so we set it with default music drawable
+        } else { //if it has its own album art
+            Glide.with(context).asBitmap() //then set Glide library (Used Gradle Dependency)
+                    .load(image) //load the byte array
+                    .circleCrop() //crop the image as circle
+                    //.centerCrop() //crop the image as square
+                    .into(viewHolder.albumArtHolder); //set in viewholder Albim art Image View
         }
 
         // onClick listener on recyclerView
@@ -139,6 +142,14 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }).show();
             }
         });
+    }
+
+    private byte[] getAlbumArt(String uri){
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(uri);
+        byte[] art = retriever.getEmbeddedPicture();
+        retriever.release();
+        return art;
     }
 
     @Override
