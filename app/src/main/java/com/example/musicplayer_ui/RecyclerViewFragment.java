@@ -7,22 +7,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,20 +36,25 @@ import java.util.List;
 public class RecyclerViewFragment extends Fragment {
     RecyclerView mRecyclerView;
     SongsAdapter mSongsAdapter;
-    ArrayList<String> sendSongs=new ArrayList<>();
     List<Songs> modifyList=new ArrayList<>();
+    public static boolean flag=false;
     private static final String TAG="RecyclerViewFragment";
+    public static RecyclerViewFragment newInstance(){
+        return new RecyclerViewFragment();
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
+
     }
 @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-    View view=inflater.inflate(R.layout.list_of_files,container,false);
+    View view=inflater.inflate(R.layout.fragment_holder_for_songstab,container,false);
     Log.d(TAG,"inside on create view");
-     mRecyclerView=(RecyclerView) view.findViewById(R.id.music_list_recView);
+     mRecyclerView=(RecyclerView) view.findViewById(R.id.music_list_recycler);
+
     //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     storagePermission();
     return view;
@@ -187,7 +186,7 @@ public class RecyclerViewFragment extends Fragment {
 
     private void displaySongs(List<Songs> songs) {
         // layout manager
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // adapter
@@ -235,8 +234,10 @@ public class RecyclerViewFragment extends Fragment {
     }
     @Override
     public void onStop(){
+
         super.onStop();
-        getActivity().finishAffinity();
+//        if(flag!=true)
+//        getActivity().finishAffinity();
     }
     @Override
     public void onDestroyView(){
