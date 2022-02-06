@@ -242,7 +242,7 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onStop(){
         super.onStop();
-        getActivity().finishAffinity();
+        //getActivity().finishAffinity();
     }
     @Override
     public void onDestroyView(){
