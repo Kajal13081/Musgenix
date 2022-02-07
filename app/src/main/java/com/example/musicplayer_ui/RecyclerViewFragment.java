@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -27,7 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer_ui.adapter.SongsAdapter;
-//import com.example.musicplayer_ui.model.SearchFragment;
+import com.example.musicplayer_ui.model.SearchFragment;
 import com.example.musicplayer_ui.model.Songs;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -43,23 +42,21 @@ public class RecyclerViewFragment extends Fragment {
     RecyclerView mRecyclerView;
     SongsAdapter mSongsAdapter;
     ArrayList<String> sendSongs=new ArrayList<>();
-    static  List<Songs> modifyList=new ArrayList<>();
     private static final String TAG="RecyclerViewFragment";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setHasOptionsMenu(true);
     }
-    @Override
+@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view=inflater.inflate(R.layout.list_of_files,container,false);
-        Log.d(TAG,"inside on create view");
-        mRecyclerView=(RecyclerView) view.findViewById(R.id.music_list_recView);
-        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        storagePermission();
-        return view;
-    }
+    View view=inflater.inflate(R.layout.list_of_files,container,false);
+    Log.d(TAG,"inside on create view");
+     mRecyclerView=(RecyclerView) view.findViewById(R.id.music_list_recView);
+    //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    storagePermission();
+    return view;
+}
     public void storagePermission(){
         Dexter.withContext(getContext())
                 .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -101,7 +98,6 @@ public class RecyclerViewFragment extends Fragment {
                 MediaStore.Audio.Media.DISPLAY_NAME, // song name
                 MediaStore.Audio.Media.DURATION, // song duration
                 MediaStore.Audio.Media.ALBUM_ID, // song image
-                MediaStore.Audio.Media.DATA,
         };
 
         // sort order of songs
@@ -115,8 +111,7 @@ public class RecyclerViewFragment extends Fragment {
             int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME);
             int durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
             int albumIdColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID);
-            // taking path index
-            int path=cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
+
             //getting the values from cursor indices
             while (cursor.moveToNext()) {
                 //get values of columns for a give audio file
@@ -124,8 +119,7 @@ public class RecyclerViewFragment extends Fragment {
                 String name = cursor.getString(nameColumn);
                 int duration = cursor.getInt(durationColumn);
                 long albumId = cursor.getLong(albumIdColumn);
-                // storing path to string
-                String songPath=cursor.getString(path);
+
                 //song uri
                 Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
 
@@ -136,17 +130,15 @@ public class RecyclerViewFragment extends Fragment {
                 name = name.substring(0, name.lastIndexOf("."));
 
                 // get songs item from model class
-                Songs song = new Songs(id, uri, name, duration, albumId, albumArtUri,songPath);
+                Songs song = new Songs(id, uri, name, duration, albumId, albumArtUri);
                 // add songs to song Arraylist
                 songs.add(song);
             }
 
             // display songs in recyclerView
-            //displaySongs(songs);
-            modifyList=  songs;
-            modifySongsList(songs,1);
-//            for(int i=0;i<songs.size();i++)
-//                sendSongs.add(songs.get(i).getName());
+            displaySongs(songs);
+            for(int i=0;i<songs.size();i++)
+                sendSongs.add(songs.get(i).getName());
             // Number of songs available
             for(int i=0;i<songs.size();i++){
                 Log.d(TAG,"!!!!!! "+songs.get(i).getName()+"  ??"+songs.get(i).getAlbumArtUri());
@@ -159,32 +151,16 @@ public class RecyclerViewFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);
         inflater.inflate(R.menu.fragment_menu,menu);
-        MenuItem item=menu.findItem(R.id.three_dots);
+        MenuItem item=menu.findItem(R.id.search_action);
+        View view= MenuItemCompat.getActionView((item));
 
 
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 
-        switch(item.getItemId()){
-
-            case R.id.item1:
-                modifySongsList(modifyList,1);
-                break;
-
-            case R.id.item2:
-                modifySongsList(modifyList,2);
-                break;
-
-            case R.id.item3:
-                modifySongsList(modifyList,3);
-                break;
-
-        }
-
         return true;
     }
-
     private void displaySongs(List<Songs> songs) {
         // layout manager
         //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -195,44 +171,6 @@ public class RecyclerViewFragment extends Fragment {
         mRecyclerView.setAdapter(mSongsAdapter);
 
     }
-    public void modifySongsList(List<Songs> modifySongs,int sort){
-        Songs swapSong;
-        if(sort==1){
-            for(int i=0;i<modifySongs.size();i++){
-                for(int j=i+1;j<modifySongs.size();j++){
-                    if(modifySongs.get(j).getName().compareToIgnoreCase(modifySongs.get(i).getName())<0){
-                        swapSong=modifySongs.get(j);
-                        modifySongs.set(j,modifySongs.get(i));
-                        modifySongs.set(i,swapSong);
-                    }
-                }
-            }
-        }
-        else if(sort==2){
-            for(int i=0;i<modifySongs.size();i++){
-                for(int j=i+1;j<modifySongs.size();j++){
-                    if(modifySongs.get(j).getName().compareToIgnoreCase(modifySongs.get(i).getName())>0){
-                        swapSong=modifySongs.get(j);
-                        modifySongs.set(j,modifySongs.get(i));
-                        modifySongs.set(i,swapSong);
-                    }
-                }
-            }
-        }
-        else{
-            for(int i=0;i<modifySongs.size();i++){
-                for(int j=i+1;j<modifySongs.size();j++){
-                    if(modifySongs.get(j).getDuration()<modifySongs.get(i).getDuration()){
-                        swapSong=modifySongs.get(j);
-                        modifySongs.set(j,modifySongs.get(i));
-                        modifySongs.set(i,swapSong);
-                    }
-                }
-            }
-        }
-
-        displaySongs(modifySongs);
-    }
     @Override
     public void onStop(){
         super.onStop();
@@ -240,7 +178,7 @@ public class RecyclerViewFragment extends Fragment {
     }
     @Override
     public void onDestroyView(){
-        super.onDestroyView();
+    super.onDestroyView();
         //getActivity().finishAffinity();
     }
 }
