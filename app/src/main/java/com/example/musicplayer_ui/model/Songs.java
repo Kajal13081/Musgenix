@@ -11,16 +11,14 @@ public class Songs {
     int duration;
     long albumId;
     Uri albumArtUri;
-    String path;
 
     // constructor
-    public Songs(long id, Uri uri, String name, int duration, long albumId, Uri albumArtUri,String path) {
+    public Songs(long id, Uri uri, String name, int duration, long albumId, Uri albumArtUri) {
         this.id = id;
         this.uri = uri;
         this.name = name;
         this.duration = duration;
         this.albumId = albumId;
-        this.path=path;
         this.albumArtUri = albumArtUri;
     }
 
@@ -49,8 +47,5 @@ public class Songs {
 
     public Uri getAlbumArtUri() {
         return albumArtUri;
-    }
-    public String getPath(){
-        return path;
     }
 }
