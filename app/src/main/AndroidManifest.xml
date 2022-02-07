@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.musicplayer_ui">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicPlayer_UI">
+ PlayerActivity_shubhankar
+        <activity
+            android:name=".MusicPlayerActivity"
+            android:exported="true" />
+
+ main
         <activity
             android:name=".MainActivity"
             android:exported="true">
