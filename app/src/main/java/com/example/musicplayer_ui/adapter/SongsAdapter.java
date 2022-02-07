@@ -102,6 +102,7 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 new AlertDialog.Builder(view.getContext()).setTitle("Song Options").setItems(new String[]{"Set as Ringtone", "Set as Alarm tone", "Share Song"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
                         // Check if permissions have been granted
                         if(!Settings.System.canWrite(view.getContext()))
                         {

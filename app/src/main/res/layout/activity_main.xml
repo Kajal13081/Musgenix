@@ -6,10 +6,25 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".MainActivity">
-
-    <FrameLayout
-        android:id="@+id/fragment_holder"
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:id="@+id/tab_layout"
+        android:background="?android:attr/colorPrimary"
+        app:tabSelectedTextColor="#A9BE77"
+        app:tabTextColor="@color/white"
+        app:tabTextAppearance="@style/Custom_tab_text"
+        app:tabIndicatorColor="#A9BE77"/>
 
-</RelativeLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tab_layout">
+
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+
+
+        </RelativeLayout>
