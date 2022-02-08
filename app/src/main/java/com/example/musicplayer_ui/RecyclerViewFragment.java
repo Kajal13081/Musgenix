@@ -48,7 +48,7 @@ public class RecyclerViewFragment extends Fragment {
     SongsAdapter mSongsAdapter;
 
     ArrayList<String> sendSongs=new ArrayList<>();
-    List<Songs> modifyList=new ArrayList<>();
+    static List<Songs> modifyList=new ArrayList<>();
     public static boolean flag=false;
     private static final String TAG="RecyclerViewFragment";
     public static RecyclerViewFragment newInstance(){

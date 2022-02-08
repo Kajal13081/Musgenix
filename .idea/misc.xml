@@ -36,6 +36,8 @@
         <entry key="..\:/Users/dell/AndroidStudioProjects/MusicPlayer_UI/app/src/main/res/drawable/item_bg.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/MusicPlayer_UI/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/MusicPlayer_UI/app/src/main/res/layout/music_item.xml" value="0.18645833333333334" />
+        <entry key="app/src/main/res/drawable/bac_pa.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_music_player.xml" value="0.20925925925925926" />
       </map>
     </option>
   </component>
