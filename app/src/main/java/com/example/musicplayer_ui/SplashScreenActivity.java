@@ -19,7 +19,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             public void run(){
                 try {
-                    sleep(2500);
+                    sleep(2500); //Reduced to ~2.5 seconds from 5 seconds
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
