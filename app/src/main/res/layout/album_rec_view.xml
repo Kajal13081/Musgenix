@@ -3,11 +3,10 @@
     android:id="@+id/albumsRecView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:layout_marginTop="20dp">
-    <ImageView
+    android:orientation="horizontal">
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/music"/>
+        android:id="@+id/albums_title"/>
 
 </LinearLayout>

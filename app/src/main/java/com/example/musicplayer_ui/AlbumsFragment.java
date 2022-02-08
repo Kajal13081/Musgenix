@@ -11,9 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.musicplayer_ui.adapter.AlbumsTitleAdapter;
 
 public class AlbumsFragment extends Fragment {
     private static final String TAG="AlbumsFragment";
+    private RecyclerView mRecyclerView;
     public static AlbumsFragment newInstance(){
         return new AlbumsFragment();
     }
@@ -25,9 +30,12 @@ public class AlbumsFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-
         View view=inflater.inflate(R.layout.fragment_holder_for_albumstab,container,false);
         Log.d(TAG,"inside on create view of albums fragment");
+        mRecyclerView=(RecyclerView) view.findViewById(R.id.rec_view_albums);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        AlbumsTitleAdapter albumsAdapter=new AlbumsTitleAdapter(getContext());
+        mRecyclerView.setAdapter(albumsAdapter);
         return view;
     }
     @Override
@@ -35,7 +43,6 @@ public class AlbumsFragment extends Fragment {
         super.onCreateOptionsMenu(menu,inflater);
         inflater.inflate(R.menu.fragment_menu,menu);
         MenuItem item=menu.findItem(R.id.three_dots);
-
 
     }
     @Override

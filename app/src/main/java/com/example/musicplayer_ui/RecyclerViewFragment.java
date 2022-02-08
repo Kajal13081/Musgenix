@@ -162,6 +162,7 @@ public class RecyclerViewFragment extends Fragment {
                 Log.d(TAG,"!!!!!! "+songs.get(i).getName()+"  ??"+songs.get(i).getAlbumArtUri());
             }
             Toast.makeText(getContext(), "Number Of Songs " +songs.size(), Toast.LENGTH_SHORT).show();
+
         }
 
     }
@@ -273,4 +274,7 @@ public class RecyclerViewFragment extends Fragment {
         }
 
     };
+
+
+
 }
