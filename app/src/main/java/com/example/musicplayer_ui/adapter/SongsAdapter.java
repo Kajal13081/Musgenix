@@ -25,10 +25,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.musicplayer_ui.MusicPlayerActivity;
 import com.example.musicplayer_ui.R;
 import com.example.musicplayer_ui.model.Songs;
 
@@ -55,7 +57,7 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         // current song and viewHolder
         Songs song = songs.get(position);
@@ -81,8 +83,15 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         viewHolder.musicItemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playAudio(songs.get(holder.getAdapterPosition()).getPath());
-                Toast.makeText(v.getContext(), " Song Selected: " + song.getName(), Toast.LENGTH_LONG).show();
+                // playAudio(songs.get(holder.getAdapterPosition()).getPath());
+                // Toast.makeText(v.getContext(), " Song Selected: " + song.getName(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(v.getContext(), MusicPlayerActivity.class)
+                        .putExtra("index", position)
+                        .putExtra("class", "SongsAdapter")
+                        .putExtra("songName", song.getName())
+                        .putExtra("SongIcon", image);
+                ContextCompat.startActivity(v.getContext(), intent, null);
+
 
             }
         });

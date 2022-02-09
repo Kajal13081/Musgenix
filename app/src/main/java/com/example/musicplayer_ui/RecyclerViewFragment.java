@@ -48,7 +48,8 @@ public class RecyclerViewFragment extends Fragment {
     SongsAdapter mSongsAdapter;
 
     ArrayList<String> sendSongs=new ArrayList<>();
-    List<Songs> modifyList=new ArrayList<>();
+    static List<Songs> modifyList=new ArrayList<>();
+    public static boolean flag=false;
     private static final String TAG="RecyclerViewFragment";
     public static RecyclerViewFragment newInstance(){
         return new RecyclerViewFragment();
@@ -161,7 +162,6 @@ public class RecyclerViewFragment extends Fragment {
                 Log.d(TAG,"!!!!!! "+songs.get(i).getName()+"  ??"+songs.get(i).getAlbumArtUri());
             }
             Toast.makeText(getContext(), "Number Of Songs " +songs.size(), Toast.LENGTH_SHORT).show();
-
         }
 
     }
@@ -273,7 +273,4 @@ public class RecyclerViewFragment extends Fragment {
         }
 
     };
-
-
-
 }
