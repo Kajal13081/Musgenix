@@ -18,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,17 +37,20 @@ import com.example.musicplayer_ui.R;
 import com.example.musicplayer_ui.model.Songs;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
     List<Songs> songs;
+    List<Songs> SongsNew;
     private Context context;
     private static final String TAG="SongsAdapter";
     // constructor
     public SongsAdapter(Context context, List<Songs> songs) {
         this.songs = songs;
         this.context = context;
+        this.SongsNew = new ArrayList<>(songs);
     }
 
     @NonNull
@@ -55,6 +60,35 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         View view = inflater.inflate(R.layout.music_item, parent, false);
         return new SongViewHolder(view);
     }
+
+    private final Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Songs> Filtered = new ArrayList<>();
+            if(charSequence == null || charSequence.length() == 0) {
+                Filtered.addAll(SongsNew);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+
+                for(Songs s : SongsNew) {
+                    if((s.getName().toLowerCase()).contains(filterPattern))
+                        Filtered.add(s);
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = Filtered;
+            results.count = Filtered.size();
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            songs.clear();
+            songs.addAll((ArrayList<Songs>)filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
@@ -164,6 +198,11 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemCount() {
         return songs.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     // custom viewHolder
