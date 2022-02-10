@@ -26,6 +26,14 @@
         </menu>
     </item>
 
+    <item
+        android:id="@+id/search_option"
+        android:icon="@drawable/search"
+        android:orderInCategory="2"
+        app:showAsAction="always"
+        android:title="Search"
+        app:actionViewClass="android.widget.SearchView" />
+
 
 
 </menu>
