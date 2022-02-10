@@ -236,18 +236,18 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
         return  totalDurationText;
     }
-    public void playAudio(String songName){
-        Log.d(TAG,"}}}}}}}}}}}}}}}}"+songName);
-        MediaPlayer mp=new MediaPlayer();
-        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try{
-            mp.setDataSource(songName);
-            mp.prepare();
-            mp.start();
-        }catch(Exception ex){
-            ex.printStackTrace();
-
-        }
-    }
+//    public void playAudio(String songName){
+//        Log.d(TAG,"}}}}}}}}}}}}}}}}"+songName);
+//        MediaPlayer mp=new MediaPlayer();
+//        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//        try{
+//            mp.setDataSource(songName);
+//            mp.prepare();
+//            mp.start();
+//        }catch(Exception ex){
+//            ex.printStackTrace();
+//
+//        }
+//    }
 
 }
