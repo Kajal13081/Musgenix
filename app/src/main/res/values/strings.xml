@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Musgenix</string>
+    <string name="titleSongs">Songs</string>
+    <string name="titleAlbums">Albums</string>
+    <string name="titlePlaylists">Playlists</string>
+    <string name="titleArtists">Artists</string>
 </resources>

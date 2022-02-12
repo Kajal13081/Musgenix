@@ -18,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,25 +27,30 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.musicplayer_ui.MusicPlayerActivity;
 import com.example.musicplayer_ui.R;
 import com.example.musicplayer_ui.model.Songs;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
     List<Songs> songs;
+    List<Songs> SongsNew;
     private Context context;
     private static final String TAG="SongsAdapter";
     // constructor
     public SongsAdapter(Context context, List<Songs> songs) {
         this.songs = songs;
         this.context = context;
+        this.SongsNew = new ArrayList<>(songs);
     }
 
     @NonNull
@@ -54,8 +61,37 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return new SongViewHolder(view);
     }
 
+    private final Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Songs> Filtered = new ArrayList<>();
+            if(charSequence == null || charSequence.length() == 0) {
+                Filtered.addAll(SongsNew);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+
+                for(Songs s : SongsNew) {
+                    if((s.getName().toLowerCase()).contains(filterPattern))
+                        Filtered.add(s);
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = Filtered;
+            results.count = Filtered.size();
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            songs.clear();
+            songs.addAll((ArrayList<Songs>)filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         // current song and viewHolder
         Songs song = songs.get(position);
@@ -81,8 +117,15 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         viewHolder.musicItemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playAudio(songs.get(holder.getAdapterPosition()).getPath());
-                Toast.makeText(v.getContext(), " Song Selected: " + song.getName(), Toast.LENGTH_LONG).show();
+                // playAudio(songs.get(holder.getAdapterPosition()).getPath());
+                // Toast.makeText(v.getContext(), " Song Selected: " + song.getName(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(v.getContext(), MusicPlayerActivity.class)
+                        .putExtra("index", position)
+                        .putExtra("class", "SongsAdapter")
+                        .putExtra("songName", song.getName())
+                        .putExtra("SongIcon", image);
+                ContextCompat.startActivity(v.getContext(), intent, null);
+
 
             }
         });
@@ -102,6 +145,7 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 new AlertDialog.Builder(view.getContext()).setTitle("Song Options").setItems(new String[]{"Set as Ringtone", "Set as Alarm tone", "Share Song"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
                         // Check if permissions have been granted
                         if(!Settings.System.canWrite(view.getContext()))
                         {
@@ -156,6 +200,11 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return songs.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
     // custom viewHolder
     public static class SongViewHolder extends RecyclerView.ViewHolder{
 
@@ -187,18 +236,18 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
         return  totalDurationText;
     }
-    public void playAudio(String songName){
-        Log.d(TAG,"}}}}}}}}}}}}}}}}"+songName);
-        MediaPlayer mp=new MediaPlayer();
-        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try{
-            mp.setDataSource(songName);
-            mp.prepare();
-            mp.start();
-        }catch(Exception ex){
-            ex.printStackTrace();
-
-        }
-    }
+//    public void playAudio(String songName){
+//        Log.d(TAG,"}}}}}}}}}}}}}}}}"+songName);
+//        MediaPlayer mp=new MediaPlayer();
+//        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//        try{
+//            mp.setDataSource(songName);
+//            mp.prepare();
+//            mp.start();
+//        }catch(Exception ex){
+//            ex.printStackTrace();
+//
+//        }
+//    }
 
 }

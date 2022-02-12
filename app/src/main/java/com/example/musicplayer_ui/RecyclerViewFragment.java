@@ -19,6 +19,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,8 +49,12 @@ public class RecyclerViewFragment extends Fragment {
     SongsAdapter mSongsAdapter;
 
     ArrayList<String> sendSongs=new ArrayList<>();
-    List<Songs> modifyList=new ArrayList<>();
+    static List<Songs> modifyList=new ArrayList<>();
+    public static boolean flag=false;
     private static final String TAG="RecyclerViewFragment";
+    public static RecyclerViewFragment newInstance(){
+        return new RecyclerViewFragment();
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +63,10 @@ public class RecyclerViewFragment extends Fragment {
     }
 @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-    View view=inflater.inflate(R.layout.list_of_files,container,false);
+    View view=inflater.inflate(R.layout.fragment_holder_for_songstab,container,false);
     Log.d(TAG,"inside on create view");
-     mRecyclerView=(RecyclerView) view.findViewById(R.id.music_list_recView);
+     mRecyclerView=(RecyclerView) view.findViewById(R.id.music_list_recycler);
+
     //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     storagePermission();
     return view;
@@ -164,7 +170,23 @@ public class RecyclerViewFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);
         inflater.inflate(R.menu.fragment_menu,menu);
-        MenuItem item=menu.findItem(R.id.three_dots);
+        MenuItem item1 = menu.findItem(R.id.search_option);
+        SearchView searchView = (SearchView) item1.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("Search Here");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                mSongsAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
 
 
     }
@@ -242,7 +264,7 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onStop(){
         super.onStop();
-        getActivity().finishAffinity();
+        //getActivity().finishAffinity();
     }
     @Override
     public void onDestroyView(){
