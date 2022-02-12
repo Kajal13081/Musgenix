@@ -10,6 +10,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     Button pausePlay, nextBtn, previousBtn, btnff, btnfr;
     TextView titleTv, currentTimeTv, totalTimeTv;
     SeekBar seekBar;
-    ImageView musicIcon;
+    ImageView musicIcon,mHeartIcon;
     public static final String EXTRA_NAME = "song_name";
     static MediaPlayer mediaPlayer = null;
     int songPosition = 0 ;
@@ -75,6 +76,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.btnnext);
         previousBtn = findViewById(R.id.btnprev);
         musicIcon = findViewById(R.id.imageview);
+        mHeartIcon=findViewById(R.id.heart_icon);
         // mVisualizer = findViewById(R.id.blast);
         btnff = findViewById(R.id.btnff);
         btnfr = findViewById(R.id.btnfr);
@@ -98,7 +100,27 @@ public class MusicPlayerActivity extends AppCompatActivity {
             }
 
         }
+        if(musicListPA.get(songPosition).getLiked()==false){
+            mHeartIcon.setImageResource(R.drawable.heart_white);
+        }
+        else if(musicListPA.get(songPosition).getLiked()==true){
+            mHeartIcon.setImageResource(R.drawable.heart_red);
+        }
+        mHeartIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(musicListPA.get(songPosition).getLiked()==false){
+                    mHeartIcon.setImageResource(R.drawable.heart_red);
+                    musicListPA.get(songPosition).setLiked(true);
+                }
+                else if(musicListPA.get(songPosition).getLiked()==true){
+                    mHeartIcon.setImageResource(R.drawable.heart_white);
+                    musicListPA.get(songPosition).setLiked(false);
+                }
 
+                Log.d(TAG,"got position : "+musicListPA.get(songPosition).getName());
+            }
+        });
 
         pausePlay.setOnClickListener(v ->{
             if (isPlaying){
