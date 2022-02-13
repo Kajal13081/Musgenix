@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.content.Intent;
+import android.widget.Toast;
 
 public class MusicPlayerActivity extends AppCompatActivity {
 
@@ -44,6 +45,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     static MediaPlayer mediaPlayer = null;
     int songPosition = 0 ;
     int x=10;
+    int count_loop = 0; //for counting the no of times loop button is pressed
     Intent i = getIntent();
     public static  ArrayList<Songs> musicListPA;
     public static Boolean isPlaying = false;
@@ -78,6 +80,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         // mVisualizer = findViewById(R.id.blast);
         btnff = findViewById(R.id.btnff);
         btnfr = findViewById(R.id.btnfr);
+        ImageView loop = findViewById(R.id.loop);
 
         titleTv.setSelected(true);
         Intent i = getIntent();
@@ -113,6 +116,29 @@ public class MusicPlayerActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(v ->{
             prevNextSong(true);
         });
+        //for looping the music
+        loop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mediaPlayer.isPlaying()){
+                    if (loop.isPressed()){
+                        count_loop+=1;
+                        if (count_loop%2==1){
+                            mediaPlayer.setLooping(true);
+                            Toast.makeText(getApplicationContext(), "Loop is On", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            mediaPlayer.setLooping(false);
+                            Toast.makeText(getApplicationContext(), "Loop is Off", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Please play the music first", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         btnff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
