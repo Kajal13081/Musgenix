@@ -23,7 +23,7 @@ public class Songs {
         this.albumId = albumId;
         this.path=path;
         this.albumArtUri = albumArtUri;
-        this.liked=false;
+        this.liked=liked;
     }
 
     // getters to get the values
@@ -55,6 +55,7 @@ public class Songs {
     public String getPath(){
         return path;
     }
+    // setting fav songs variable
     public void setLiked(boolean liked){
         this.liked=liked;
     }

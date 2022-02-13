@@ -12,11 +12,11 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
+// for not showing app bar at time of animation
         getSupportActionBar().hide();
-
+// using a thread for animation purpose
         Thread td = new Thread(){
-
+// execution of thread starts
             public void run(){
                 try {
                     sleep(2500); //Reduced to ~2.5 seconds from 5 seconds

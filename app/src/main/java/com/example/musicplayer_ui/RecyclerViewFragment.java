@@ -51,19 +51,22 @@ public class RecyclerViewFragment extends Fragment {
     static List<Songs> modifyList=new ArrayList<>();
     public static boolean flag=false;
     private static final String TAG="RecyclerViewFragment";
+    // method for creating fragment from any other class
     public static RecyclerViewFragment newInstance(){
         return new RecyclerViewFragment();
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+// for showing menu bar
         setHasOptionsMenu(true);
     }
 @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        //view to be inflated upon creation of this fragment
     View view=inflater.inflate(R.layout.fragment_holder_for_songstab,container,false);
     Log.d(TAG,"inside on create view");
+    // finding recycler view in the view returned above
      mRecyclerView=(RecyclerView) view.findViewById(R.id.music_list_recycler);
 
     //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -98,6 +101,7 @@ public class RecyclerViewFragment extends Fragment {
         // define list to carry the songs
         List<Songs> songs = new ArrayList<>();
         Uri songLibraryUri;
+        //checking SDK version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
             songLibraryUri = MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL);
         }else {
@@ -168,7 +172,9 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);
+        // inflating menu bar
         inflater.inflate(R.menu.fragment_menu,menu);
+        //finding item declared in menu bar
         MenuItem item=menu.findItem(R.id.three_dots);
 
 
@@ -177,7 +183,7 @@ public class RecyclerViewFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item){
 
         switch(item.getItemId()){
-
+// performing specific action on basis of choice
             case R.id.item1:
                 modifySongsList(modifyList,1);
                 break;
@@ -196,18 +202,21 @@ public class RecyclerViewFragment extends Fragment {
     }
 
     private void displaySongs(List<Songs> songs) {
-        // layout manager
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        // setting linear layout to recycler view for showing songs list
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // adapter
         mSongsAdapter = new SongsAdapter(getContext(), songs); //added context
+        // setting adapter to recycler view
         mRecyclerView.setAdapter(mSongsAdapter);
+        // creating ItemTouchHelper object for adding swipe feature on items of songs list
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
     }
+    // function for rearranging songs list on basis of user choice
     public void modifySongsList(List<Songs> modifySongs,int sort){
         Songs swapSong;
+        // performing sort
         if(sort==1){
             for(int i=0;i<modifySongs.size();i++){
                 for(int j=i+1;j<modifySongs.size();j++){
@@ -263,9 +272,11 @@ public class RecyclerViewFragment extends Fragment {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            // removing song from the list
             modifyList.remove(viewHolder.getAdapterPosition());
+            // calling method to tell adapter about data change
             mSongsAdapter.notifyDataSetChanged();
-
+// informs user for completion of task which was initiated is showed as a toast but difference is that this msg can be swiped unlike toasts
             Snackbar snackbar = Snackbar.make(mRecyclerView, "Item was removed from the list.", Snackbar.LENGTH_LONG);
             snackbar.setActionTextColor(Color.YELLOW);
             snackbar.show();
