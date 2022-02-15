@@ -157,6 +157,31 @@
 
             </androidx.appcompat.widget.AppCompatButton>
 
+            <ImageView
+                android:id="@+id/loop"
+                android:layout_width="57dp"
+                android:layout_height="43dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="179dp"
+                android:layout_marginEnd="173dp"
+                android:visibility="visible"
+                android:layout_marginBottom="31dp"
+                app:srcCompat="@drawable/loop" />
+
+            <ImageView
+                android:id="@+id/loop_change"
+                android:layout_width="wrap_content"
+                android:layout_height="98dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginEnd="147dp"
+                android:layout_marginBottom="-5dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rectangular_loop" />
 
 
         </RelativeLayout>
