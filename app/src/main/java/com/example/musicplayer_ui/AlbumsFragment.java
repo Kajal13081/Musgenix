@@ -32,6 +32,7 @@ public class AlbumsFragment extends Fragment {
     public static RecyclerView recyclerView;
     private List<Songs> songsForAlbums=new ArrayList<>();
     private List<String> albumsTitle=new ArrayList<>();
+    // method for creating fragment from outside class
     public static AlbumsFragment newInstance(){
         return new AlbumsFragment();
     }
@@ -44,10 +45,13 @@ public class AlbumsFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
+        // inflating view of fragment
         View view=inflater.inflate(R.layout.fragment_holder_for_albumstab,container,false);
         Log.d(TAG,"inside on create view of albums fragment");
+        // finding recycler view associated with view
         mRecyclerView=(RecyclerView) view.findViewById(R.id.rec_view_albums);
         recyclerView=mRecyclerView;
+        // setting layout manager and adapter to recycler view
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         AlbumsTitleAdapter albumsAdapter=new AlbumsTitleAdapter(getContext(),albumsTitle,songsForAlbums);
         mRecyclerView.setAdapter(albumsAdapter);
@@ -56,12 +60,13 @@ public class AlbumsFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);
+        // inflating menu bar
         inflater.inflate(R.menu.fragment_menu,menu);
         MenuItem item=menu.findItem(R.id.three_dots);
 
     }
     public void fetchSongsForAlbums(){
-
+// fetching songs again for albums fragment
         Uri songLibraryUri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
             songLibraryUri = MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL);
@@ -118,7 +123,7 @@ public class AlbumsFragment extends Fragment {
         }
     }
     public void segregateSongs(List<Songs> segSongs){
-
+        // grouping songs list on basis of different locations i.e downloads, whats app, shared etc.
         String str,str1;
         int last;
         for(int i=0;i<segSongs.size();i++){
