@@ -6,15 +6,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".MainActivity">
+
     <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/tab_layout"
-        android:background="?android:attr/colorPrimary"
-        app:tabSelectedTextColor="#A9BE77"
-        app:tabTextColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/tab_bg"
+        app:tabIndicator="@color/white"
+        app:tabIndicatorAnimationMode="linear"
+        app:tabIndicatorAnimationDuration="@integer/material_motion_duration_short_1"
+        app:tabSelectedTextColor="#00FFE2"
         app:tabTextAppearance="@style/Custom_tab_text"
-        app:tabIndicatorColor="#A9BE77"/>
+        app:tabTextColor="@color/white" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
