@@ -19,6 +19,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -174,8 +175,28 @@ public class RecyclerViewFragment extends Fragment {
         super.onCreateOptionsMenu(menu,inflater);
         // inflating menu bar
         inflater.inflate(R.menu.fragment_menu,menu);
+
         //finding item declared in menu bar
         MenuItem item=menu.findItem(R.id.three_dots);
+
+        MenuItem item1 = menu.findItem(R.id.search_option);
+        SearchView searchView = (SearchView) item1.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("Search Here");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                mSongsAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
 
 
     }
