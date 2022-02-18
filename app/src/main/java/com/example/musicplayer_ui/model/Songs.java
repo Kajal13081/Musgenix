@@ -12,10 +12,9 @@ public class Songs {
     long albumId;
     Uri albumArtUri;
     String path;
-    boolean liked;
 
     // constructor
-    public Songs(long id, Uri uri, String name, int duration, long albumId, Uri albumArtUri,String path,boolean liked) {
+    public Songs(long id, Uri uri, String name, int duration, long albumId, Uri albumArtUri,String path) {
         this.id = id;
         this.uri = uri;
         this.name = name;
@@ -23,7 +22,6 @@ public class Songs {
         this.albumId = albumId;
         this.path=path;
         this.albumArtUri = albumArtUri;
-        this.liked=liked;
     }
 
     // getters to get the values
@@ -54,12 +52,5 @@ public class Songs {
     }
     public String getPath(){
         return path;
-    }
-    // setting fav songs variable
-    public void setLiked(boolean liked){
-        this.liked=liked;
-    }
-    public boolean getLiked(){
-        return liked;
     }
 }

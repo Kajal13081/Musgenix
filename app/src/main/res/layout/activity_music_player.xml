@@ -156,13 +156,7 @@
                 android:background="@drawable/ic_baseline_fast_rewind_24">
 
             </androidx.appcompat.widget.AppCompatButton>
-            <ImageView
-                android:id="@+id/heart_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/heart_white"
-                android:layout_marginTop="80dp"
-                android:layout_centerHorizontal="true"/>
+
 
 
 

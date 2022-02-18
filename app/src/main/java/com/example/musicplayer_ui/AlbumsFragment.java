@@ -109,7 +109,7 @@ public class AlbumsFragment extends Fragment {
                 name = name.substring(0, name.lastIndexOf("."));
 
                 // get songs item from model class
-                Songs song = new Songs(id, uri, name, duration, albumId, albumArtUri,songPath,false);
+                Songs song = new Songs(id, uri, name, duration, albumId, albumArtUri,songPath);
                 // add songs to song Arraylist
                 songsForAlbums.add(song);
             }
