@@ -27,8 +27,7 @@ This is an example of how you may give instructions on setting up your project l
 You should have:<br>
 1. [Git CLI](https://git-scm.com/downloads)
 2. Either [Android Studio](https://developer.android.com/studio?hl=en) installed on your system, or
-3. An Android Device running Android version 5.0 or above, or
-4. both.
+3. An Android Device running Android version 5.0 or above, or both.
 
 ### Installation
 * Method 1: Use this repo itself by clicking [here.](https://github.com/Kajal13081/Musgenix/archive/refs/heads/main.zip)
