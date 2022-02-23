@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -37,7 +38,8 @@ import android.content.Intent;
 public class MusicPlayerActivity extends AppCompatActivity {
 
 
-    Button pausePlay, nextBtn, previousBtn, btnff, btnfr;
+    Button pausePlay;
+    ImageButton nextBtn, previousBtn, btnff, btnfr;
     TextView titleTv, currentTimeTv, totalTimeTv;
     SeekBar seekBar;
     ImageView musicIcon,mHeartIcon;
