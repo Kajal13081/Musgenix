@@ -20,11 +20,15 @@
             android:id="@+id/txtsn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:padding="10dp"
             android:singleLine="true"
+myBranch
+
             android:layout_marginBottom="30dp"
+JWOC
             android:text="Song name"
             android:textAlignment="center"
             android:textColor="#FFF"
@@ -63,29 +67,29 @@
 
             <TextView
                 android:id="@+id/txtsstart"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="false"
+                android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_toLeftOf="@+id/seekbar"
-                android:text="0:10"
+                android:text="00:10"
                 android:textColor="#FFF"
-                android:textSize="12sp">
+                android:textSize="10sp">
 
             </TextView>
 
             <TextView
                 android:id="@+id/txtsstop"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="false"
+                android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="10dp"
                 android:layout_toRightOf="@+id/seekbar"
-                android:text="4:10"
+                android:text="04:10"
                 android:textColor="#FFF"
-                android:textSize="12sp">
+                android:textSize="10sp">
 
             </TextView>
 
@@ -163,6 +167,7 @@
                 android:src="@drawable/ic_baseline_fast_rewind_24">
 
             </ImageButton>
+
 
 
 

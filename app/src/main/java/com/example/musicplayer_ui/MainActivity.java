@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+// modifying position of view pager
         mViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
