@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.content.Intent;
+import android.widget.Toast;
 
 public class MusicPlayerActivity extends AppCompatActivity {
 
@@ -42,11 +43,16 @@ public class MusicPlayerActivity extends AppCompatActivity {
     ImageButton nextBtn, previousBtn, btnff, btnfr;
     TextView titleTv, currentTimeTv, totalTimeTv;
     SeekBar seekBar;
+loopplayer
+    ImageView musicIcon,loop,loop_change;
+
     ImageView musicIcon,mHeartIcon;
+ JWOC
     public static final String EXTRA_NAME = "song_name";
     static MediaPlayer mediaPlayer = null;
     int songPosition = 0 ;
     int x=10;
+    int count_loop = 0;
     Intent i = getIntent();
     public static  ArrayList<Songs> musicListPA;
     public static Boolean isPlaying = false;
@@ -82,6 +88,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
         // mVisualizer = findViewById(R.id.blast);
         btnff = findViewById(R.id.btnff);
         btnfr = findViewById(R.id.btnfr);
+        loop = findViewById(R.id.loop);
+        loop_change = findViewById(R.id.loop_repeat);
 
         titleTv.setSelected(true);
         Intent i = getIntent();
@@ -103,8 +111,52 @@ public class MusicPlayerActivity extends AppCompatActivity {
             }
 
         }
+loopplayer
+//loop code for playerview
+        loop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mediaPlayer.isPlaying()){
+                    if (loop.isPressed()){
+                        count_loop+=1;
+                        if (count_loop%2==1){
+                            mediaPlayer.setLooping(true);
+                            Toast.makeText(getApplicationContext(), "Loop is On", Toast.LENGTH_SHORT).show();
+                            loop_change.setVisibility(View.VISIBLE);
+                            loop.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Please play the music first", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        loop_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mediaPlayer.isPlaying()){
+                    if (loop_change.isPressed()){
+                        count_loop+=1;
+                        if (count_loop%2==0){
+                            mediaPlayer.setLooping(false);
+                            Toast.makeText(getApplicationContext(), "Loop is Off", Toast.LENGTH_SHORT).show();
+                            loop_change.setVisibility(View.INVISIBLE);
+                            loop.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Please play the music first", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+//ends here
+
+
 
 // setting click listener on pause button
+ JWOC
         pausePlay.setOnClickListener(v ->{
             if (isPlaying){
                 pauseMusic();

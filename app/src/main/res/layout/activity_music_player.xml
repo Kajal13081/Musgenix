@@ -169,6 +169,26 @@ JWOC
             </ImageButton>
 
 
+            <ImageView
+                android:id="@+id/loop"
+                android:layout_width="28dp"
+                android:layout_height="31dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="187dp"
+                android:layout_marginBottom="30dp"
+                app:srcCompat="@drawable/repeat"
+                android:visibility="visible"/>
+            <ImageView
+                android:id="@+id/loop_repeat"
+                android:layout_width="28dp"
+                android:layout_height="31dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="187dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/repeat_once" />
 
 
         </RelativeLayout>
