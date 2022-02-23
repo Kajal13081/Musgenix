@@ -16,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.topBar)));
         // finding tabs, viewpager, and fragment adapter
         tabLayout=(TabLayout) findViewById(R.id.tab_layout);
         mViewPager=findViewById(R.id.viewpager);
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+// modifying position of view pager
         mViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {

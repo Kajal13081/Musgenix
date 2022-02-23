@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 public class ArtistsFragment extends Fragment {
     private static final String TAG="ArtistsFragment";
+    // method for creating fragment from outside class
     public static ArtistsFragment newInstance(){
         return new ArtistsFragment();
     }

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 public class PlaylistsFragment extends Fragment {
     private static final String TAG="PlaylistFragment";
+    // method for creating fragment from outside class
     public static PlaylistsFragment newInstance(){
         return new PlaylistsFragment();
     }
@@ -25,7 +26,7 @@ public class PlaylistsFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-
+// inflating view for playlists fragment
         View view=inflater.inflate(R.layout.fragment_holder_for_playliststab,container,false);
         Log.d(TAG,"inside on create view of playlist fragment");
         return view;
