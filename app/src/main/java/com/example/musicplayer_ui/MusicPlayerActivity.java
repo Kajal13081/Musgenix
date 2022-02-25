@@ -43,11 +43,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
     ImageButton nextBtn, previousBtn, btnff, btnfr;
     TextView titleTv, currentTimeTv, totalTimeTv;
     SeekBar seekBar;
-loopplayer
+
     ImageView musicIcon,loop,loop_change;
 
-    ImageView musicIcon,mHeartIcon;
- JWOC
+    ImageView mHeartIcon;
+
     public static final String EXTRA_NAME = "song_name";
     static MediaPlayer mediaPlayer = null;
     int songPosition = 0 ;
@@ -111,7 +111,7 @@ loopplayer
             }
 
         }
-loopplayer
+
 //loop code for playerview
         loop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +156,7 @@ loopplayer
 
 
 // setting click listener on pause button
- JWOC
+
         pausePlay.setOnClickListener(v ->{
             if (isPlaying){
                 pauseMusic();
