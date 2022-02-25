@@ -20,15 +20,11 @@
             android:id="@+id/txtsn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:padding="10dp"
             android:singleLine="true"
-myBranch
-
             android:layout_marginBottom="30dp"
-JWOC
             android:text="Song name"
             android:textAlignment="center"
             android:textColor="#FFF"
