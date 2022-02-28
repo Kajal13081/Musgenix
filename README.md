@@ -48,7 +48,8 @@ You should have:<br>
 ## Download APK
 [Musgenix](https://drive.google.com/drive/u/0/folders/1twVjTHzkPJ3xiv6AA_jKlYXZ1b04yJh_)
 
- ## 📸 Screenshots
+
+## 📸 Screenshots
  
 ||||
 |:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
@@ -133,12 +134,41 @@ git push -u origin <your_branch_name>
 
 16. Click on `Create pull request`.
 
-Congratulations🎉, you have made a PR to the Musgenix.
-Wait for your submission to be accepted and your PR to be merged by a maintainer.
+
+Congratulations🎉, you have made a PR to the Musgenix. 
+Wait for your submission to be accepted and your PR to be merged by a maintainer. 
+
+
+## Project Admin And Mentor 👩‍💻
+
+<table>
+  <tbody><tr>
+<td align="center"><a href="https://github.com/Kajal13081"><img alt="" src="https://avatars.githubusercontent.com/Kajal13081" width="100px;"><br><sub><b> Kajal Kumari </b></sub></a><br></td> </a></td>
+</tr>
+</tbody>
+</table>
+
+
+## Project Co-Mentor 😎
+
+<table>
+  <tbody><tr>
+<td align="center"><a href="https://github.com/vilgad"><img alt="" src="https://avatars.githubusercontent.com/vilgad" width="100px;"><br><sub><b> Rohit Gupta </b</sub</a><br></td> </a></td>
+</tr>
+</tbody>
+</table>
 
 
 ## Contributors✨
 
+<table>
+	<tr>
+		<td>
 <a href="https://github.com/Kajal13081/Musgenix/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Kajal13081/Musgenix" />
 </a>
+         </td>
+	</tr>
+</table>
+
+
