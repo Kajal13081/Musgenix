@@ -17,6 +17,19 @@
 
 Musgenix is an android music player application with features such as creating playlists, adding music to favorites, controlling music through notifications, and more.
 
+## Features of the app
+
+1. You can see your musics present in your phone in a beautiful way for our beaitiful UI design.
+2. You can set Ringtones of the music that you want.
+3. You can set that music as an Alarm tone.
+4. User can share the music with anyone through any mode.
+5. You can create your own Playlist.
+6. You can Sort songs according to your choice.
+7. Albums section is also present.
+8. Beautiful PlayerView.
+9. User can Search songs that he want.
+10. Clean and Beautiful UI design of the app.
+
 ## Tech Stack
 
 - Android Studio
@@ -34,6 +47,14 @@ You should have:<br>
 
 ## Download APK
 [Musgenix](https://drive.google.com/drive/u/0/folders/1twVjTHzkPJ3xiv6AA_jKlYXZ1b04yJh_)
+
+ ## 📸 Screenshots
+ 
+||||
+|:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
+| ![1](https://user-images.githubusercontent.com/80090908/156029814-d24748fb-1a44-4e41-ad01-718fcc6bcc15.jpeg) | ![2](https://user-images.githubusercontent.com/80090908/156029873-d1cb1c3b-70dc-46f7-930b-f59b71aaca6e.jpeg) 
+| ![3](https://user-images.githubusercontent.com/80090908/156029944-cb590f46-2a02-40b2-bc49-151ef4adad3d.jpeg)| ![4](https://user-images.githubusercontent.com/80090908/156029976-8cc7d2f7-e8e2-4c1f-a779-eb692faac192.jpeg)
+
 
 ## Roadmap
 
