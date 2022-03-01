@@ -59,7 +59,7 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-// for showing menu bar
+    // for showing menu bar
         setHasOptionsMenu(true);
     }
 @Override
@@ -74,6 +74,7 @@ public class RecyclerViewFragment extends Fragment {
     storagePermission();
     return view;
 }
+    // Asking for Storage permission
     public void storagePermission(){
         Dexter.withContext(getContext())
                 .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -98,6 +99,7 @@ public class RecyclerViewFragment extends Fragment {
                 })
                 .check();
     }
+    // fetching songs
     private void fetchSongs(){
         // define list to carry the songs
         List<Songs> songs = new ArrayList<>();
@@ -200,6 +202,7 @@ public class RecyclerViewFragment extends Fragment {
 
 
     }
+    // options section
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 
@@ -221,7 +224,7 @@ public class RecyclerViewFragment extends Fragment {
 
         return true;
     }
-
+    // Displaying the songs lists
     private void displaySongs(List<Songs> songs) {
         // setting linear layout to recycler view for showing songs list
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
