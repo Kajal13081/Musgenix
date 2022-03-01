@@ -30,6 +30,7 @@ public class ArtistsFragment extends Fragment {
         Log.d(TAG,"inside on create view of artist fragment");
         return view;
     }
+    // Creating Menu option
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);

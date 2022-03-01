@@ -59,7 +59,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     public static Runnable runnable;
     private Handler mHandler = new Handler();
     public static byte[] SongIcon;
-// overriding method for making menu items to respond
+    // overriding method for making menu items to respond
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // finding item view
@@ -76,7 +76,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_player);
-// finding all layouts
+        // initialize the variables
         titleTv = findViewById(R.id.txtsn);
         currentTimeTv = findViewById(R.id.txtsstart);
         totalTimeTv = findViewById(R.id.txtsstop);
@@ -112,7 +112,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         }
 
-//loop code for playerview
+        //Code for loop feature in PlayerView
         loop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,6 +132,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 }
             }
         });
+        // Code for change in loop function
         loop_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,11 +152,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 }
             }
         });
-//ends here
+        //ends here
 
 
 
-// setting click listener on pause button
+        // settings for pause button
 
         pausePlay.setOnClickListener(v ->{
             if (isPlaying){
@@ -164,15 +165,15 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 playMusic();
             }
         });
-        // setting click listener on previous button
+        // settings for previous button
         previousBtn.setOnClickListener(v ->{
             prevNextSong(false);
         });
-        // setting click listener on next button button
+        // settings for next button button
         nextBtn.setOnClickListener(v ->{
             prevNextSong(true);
         });
-        // setting click listener on buttons
+        // settings for fast forward button
         btnff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,21 +181,22 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 {
                     mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+10000);
                     // showing a snackbar
-                    Snackbar.make(v, "Skipped 10 seconds", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Skipped 10 seconds", Snackbar.LENGTH_SHORT).show();  // skip the songs length by 10 second
                 }
             }
         });
+        // settings for rewind button
         btnfr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mediaPlayer.isPlaying())
                 {
                     mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-10000);
-                    Snackbar.make(v, "Reversed 10 seconds", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Reversed 10 seconds", Snackbar.LENGTH_SHORT).show();   // reverse the length of the song for 10 second
                 }
             }
         });
-// using another thread for playing music
+        // using another thread for playing music
         MusicPlayerActivity.this.runOnUiThread(new Runnable() {
 
             @SuppressLint("SetTextI18n")
@@ -218,11 +220,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 mHandler.postDelayed(this, 1000);
             }
         });
-// getting drawable used to show seekbar
+        // getting drawable used to show seekbar
         seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
         // returning drawable to represent scroll thumb i.e we can scroll back and forth on seekbar
         seekBar.getThumb().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
-// setting seek var change listener
+        // setting seek var change listener
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -240,7 +242,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
             }
         });
-// performing action on completion of a song
+        // performing action on completion of a song
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
@@ -251,7 +253,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
 
-// setting layout of music icon
+    // setting layout of music icon
     private void setLayout(){
         Glide.with(this)
                 .load(musicListPA.get(songPosition).getPath())
@@ -259,7 +261,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 .into(musicIcon);
         titleTv.setText(musicListPA.get(songPosition).getName());
     }
-// initialize a media player
+    // initialize a media player
     private void createMediaPlayer(){
 
         if (mediaPlayer == null) {
@@ -285,7 +287,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     }
 
-// methods for performing various actions on buttons clicked
+    // methods for performing various actions on buttons clicked
+    // function for playing the music
     private void playMusic(){
         pausePlay.setBackgroundResource(R.drawable.ic_baseline_pause_circle_24);
         isPlaying = true;
@@ -296,7 +299,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         pausePlay.animate().rotationX(-10).setDuration(500);
 
     }
-
+    // function for pausing the music
     private void pauseMusic(){
         pausePlay.setBackgroundResource(R.drawable.ic_baseline_play_circle_24);
         isPlaying = false;
@@ -307,7 +310,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         pausePlay.animate().rotationX(10).setDuration(500);
 
     }
-
+    // function for previous next song the music
     public void prevNextSong(Boolean increment){
         if (increment){
             setSongPosition(true);
@@ -321,7 +324,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
             startAnimation(musicIcon);
         }
     }
-
+    // function for set song position the music
     private void setSongPosition(Boolean increment){
         if (increment){
             if (musicListPA.size() -1 == songPosition)
@@ -349,7 +352,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         }
         return  totalDurationText;
     }
-// method for animation
+    // method for animation
     public void startAnimation(View view)
     {
         // constructing an object animator
@@ -371,7 +374,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
 
     }
-// method for showing song icon
+    // method for showing song icon
         private byte[] getAlbumArt(String uri){
             MediaMetadataRetriever retriever = new MediaMetadataRetriever();
             retriever.setDataSource(uri);

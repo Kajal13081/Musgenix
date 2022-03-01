@@ -78,8 +78,9 @@ public class AlbumsFragment extends Fragment {
                 MediaStore.Audio.Media.DISPLAY_NAME, // song name
                 MediaStore.Audio.Media.DURATION, // song duration
                 MediaStore.Audio.Media.ALBUM_ID, // song image
-                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.DATA,    // fetching songs
         };
+        // Sorting the songs in order of duration
         String sortOrderOfSongsLists = MediaStore.Audio.Media.DATE_ADDED + " DESC ";
         try(Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(songLibraryUri, projection, null, null, sortOrderOfSongsLists)) {
 
@@ -122,6 +123,7 @@ public class AlbumsFragment extends Fragment {
 
         }
     }
+    // Function to Segregate the songs on the basis of diff location
     public void segregateSongs(List<Songs> segSongs){
         // grouping songs list on basis of different locations i.e downloads, whats app, shared etc.
         String str,str1;
@@ -130,7 +132,7 @@ public class AlbumsFragment extends Fragment {
             last=segSongs.get(i).getPath().lastIndexOf("/");
             str=segSongs.get(i).getPath().substring(0,last);
             str1=str.substring(str.lastIndexOf("/")+1,str.length());
-            if(!albumsTitle.contains(str1))
+            if(!albumsTitle.contains(str1))     // if the title contains the string then the string to the list
                 albumsTitle.add(str1);
             Log.d(TAG,"@@@@@@@@@@@"+str);
         }

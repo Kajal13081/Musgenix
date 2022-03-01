@@ -29,9 +29,10 @@ import java.util.List;
 public class AlbumsTitleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG="AlbumsTitleAdapter";
     Context context;
-    private List<String> titleAlbums=new ArrayList<>();
-    private List<Songs> albumSongs=new ArrayList<>();
+    private List<String> titleAlbums=new ArrayList<>();    // creating a list for titleAlbum
+    private List<Songs> albumSongs=new ArrayList<>();      // creating a list for albumsong
     private List<Songs> albumsSubContents=new ArrayList<>();
+    // creating album title adapter
     public AlbumsTitleAdapter(Context context, List<String> titleAlbums, List<Songs> albumsSongs){
         this.context=context;
         this.titleAlbums=titleAlbums;
@@ -81,7 +82,7 @@ public class AlbumsTitleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         });
 
     }
-
+    // Counting the number of songs present in your app
     @Override
     public int getItemCount() {
         return titleAlbums.size();

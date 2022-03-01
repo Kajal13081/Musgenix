@@ -17,11 +17,11 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 1:
-                   return AlbumsFragment.newInstance();
+                   return AlbumsFragment.newInstance();   // returns the Album fragments
             case 2:
-                return ArtistsFragment.newInstance();
+                return ArtistsFragment.newInstance();    // return the Artist fragment
             case 3:
-                return PlaylistsFragment.newInstance();
+                return PlaylistsFragment.newInstance();   // return the Playlist fragment
 
         }
         return RecyclerViewFragment.newInstance();
