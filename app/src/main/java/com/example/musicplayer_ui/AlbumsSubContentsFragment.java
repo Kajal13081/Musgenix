@@ -22,6 +22,7 @@ public class AlbumsSubContentsFragment extends Fragment {
     Context context;
     RecyclerView mRecyclerView;
     private List<Songs> albumsSongsSubContents=new ArrayList<>();
+    // method for creating fragment from outside class
     public AlbumsSubContentsFragment(Context context, List<Songs>albumsSongsSubContents){
         this.context=context;
         this.albumsSongsSubContents=albumsSongsSubContents;
@@ -29,6 +30,7 @@ public class AlbumsSubContentsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        // making background fragment invisible
         AlbumsFragment.recyclerView.setVisibility(View.INVISIBLE);
         setHasOptionsMenu(true);
     }
@@ -45,6 +47,7 @@ public class AlbumsSubContentsFragment extends Fragment {
     public void onDestroyView(){
         super.onDestroyView();
         AlbumsFragment.recyclerView.setVisibility(View.VISIBLE);
+        // clearing list of songs for displaying songs acc. to category selected each time
         albumsSongsSubContents.clear();
     }
 }

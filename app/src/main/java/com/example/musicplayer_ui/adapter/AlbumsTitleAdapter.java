@@ -41,6 +41,7 @@ public class AlbumsTitleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // inflating layout to be shown in recycler view
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
         View view=layoutInflater.inflate(R.layout.album_rec_view,parent,false);
         return new AlbumsTitleViewHolder(view);
@@ -48,6 +49,7 @@ public class AlbumsTitleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        // giving data to various components of layout to be displayed
         AlbumsTitleViewHolder albumsTitleViewHolder=(AlbumsTitleViewHolder) holder;
         albumsTitleViewHolder.mTextView.setText(titleAlbums.get(position));
         albumsTitleViewHolder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +70,7 @@ public class AlbumsTitleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 //                for(int i=0;i<albumsSubContents.size();i++){
 //                    Log.d(TAG,"got songs _______"+albumsSubContents.get(i).getName());
 //                }
+                // launching another fragment from existing one
                 FragmentManager fm=((AppCompatActivity)context).getSupportFragmentManager();
 
                 Fragment fragment= new AlbumsSubContentsFragment(v.getContext(), albumsSubContents);
@@ -84,6 +87,7 @@ public class AlbumsTitleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return titleAlbums.size();
     }
     public static class AlbumsTitleViewHolder extends RecyclerView.ViewHolder{
+        // finding all different components of layout to be inflated
         TextView mTextView;
         ImageView mImageView;
         RelativeLayout mRelativeLayout;
