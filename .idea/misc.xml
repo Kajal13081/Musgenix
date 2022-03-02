@@ -3,9 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        loopplayer
         <entry key="..\:/AndroidStudioProjects/Musgenix/app/src/main/res/layout/activity_music_player.xml" value="0.264" />
-        myBranch
+        <entry key="..\:/Musgenix-1/app/src/main/res/layout/activity_splash_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Musgenix/app/src/main/res/drawable/background.xml" value="0.3675" />
         <entry key="..\:/Musgenix/app/src/main/res/drawable/button_background.xml" value="0.3675" />
         <entry key="..\:/Musgenix/app/src/main/res/drawable/player_background.xml" value="0.1585" />
@@ -13,8 +12,6 @@
         <entry key="..\:/Musgenix/app/src/main/res/layout/activity_music_player.xml" value="0.33" />
         <entry key="..\:/Musgenix/app/src/main/res/layout/music_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Musgenix/app/src/main/res/layout/playlist_rec_view.xml" value="0.36666666666666664" />
-        JWOC
- JWOC
         <entry key="..\:/Musgenix/app/src/main/res/menu/fragment_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Open Source/Musgenix/app/src/main/res/drawable/ic_settings.xml" value="0.208" />
         <entry key="..\:/Open Source/Musgenix/app/src/main/res/drawable/item_bg.xml" value="0.208" />
