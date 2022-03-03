@@ -62,18 +62,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.topBar)));
-        // finding tabs, viewpager, and fragment adapter
+        // initialize the variables
         tabLayout=(TabLayout) findViewById(R.id.tab_layout);
         mViewPager=findViewById(R.id.viewpager);
         FragmentManager fm=getSupportFragmentManager();
         fragmentAdapter=new FragmentAdapter(fm,getLifecycle());
         mViewPager.setAdapter(fragmentAdapter);
-// adding elements to tab layout
+        // adding elements to tab layout
         tabLayout.addTab(tabLayout.newTab().setText("Songs"));
         tabLayout.addTab(tabLayout.newTab().setText("Albums"));
         tabLayout.addTab(tabLayout.newTab().setText("Artists"));
         tabLayout.addTab(tabLayout.newTab().setText("Playlists"));
-// listeners on tabs
+        // listeners on tabs
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-// modifying position of view pager
+        // modifying position of view pager
         mViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
