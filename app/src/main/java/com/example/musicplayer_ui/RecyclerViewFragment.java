@@ -98,6 +98,7 @@ public class RecyclerViewFragment extends Fragment {
                 })
                 .check();
     }
+    // Fetching songs from the adapter
     private void fetchSongs(){
         // define list to carry the songs
         List<Songs> songs = new ArrayList<>();
@@ -170,6 +171,7 @@ public class RecyclerViewFragment extends Fragment {
         }
 
     }
+    // Creating Menu option
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu,inflater);
@@ -222,6 +224,7 @@ public class RecyclerViewFragment extends Fragment {
         return true;
     }
 
+    // Displaying the songs lists
     private void displaySongs(List<Songs> songs) {
         // setting linear layout to recycler view for showing songs list
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -237,7 +240,7 @@ public class RecyclerViewFragment extends Fragment {
     // function for rearranging songs list on basis of user choice
     public void modifySongsList(List<Songs> modifySongs,int sort){
         Songs swapSong;
-        // performing sort
+        // performing sort operation
         if(sort==1){
             for(int i=0;i<modifySongs.size();i++){
                 for(int j=i+1;j<modifySongs.size();j++){
@@ -271,7 +274,7 @@ public class RecyclerViewFragment extends Fragment {
                 }
             }
         }
-
+        //displaying songs with respect to the sort the user has chosen
         displaySongs(modifySongs);
     }
     @Override
