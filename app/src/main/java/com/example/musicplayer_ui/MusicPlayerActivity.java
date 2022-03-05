@@ -84,7 +84,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_player);
-// finding all layouts
+        // initialize the variables
         titleTv = findViewById(R.id.txtsn);
         currentTimeTv = findViewById(R.id.txtsstart);
         totalTimeTv = findViewById(R.id.txtsstop);
@@ -120,7 +120,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         }
 
-//loop code for playerview
+        //Code for loop feature in PlayerView
         loop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,6 +140,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 }
             }
         });
+        // Code for change in loop function
         loop_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,11 +160,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 }
             }
         });
-//ends here
+        //ends here
 
 
 
-// setting click listener on pause button
+        // setting click listener on pause button
 
         pausePlay.setOnClickListener(v ->{
             if (isPlaying){
@@ -172,15 +173,15 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 playMusic();
             }
         });
-        // setting click listener on previous button
+        // settings for previous button
         previousBtn.setOnClickListener(v ->{
             prevNextSong(false);
         });
-        // setting click listener on next button button
+        // settings for next button button
         nextBtn.setOnClickListener(v ->{
             prevNextSong(true);
         });
-        // setting click listener on buttons
+        // settings for fast forward button
         btnff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,17 +189,18 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 {
                     mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+10000);
                     // showing a snackbar
-                    Snackbar.make(v, "Skipped 10 seconds", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Skipped 10 seconds", Snackbar.LENGTH_SHORT).show();        // skip the songs length by 10 second
                 }
             }
         });
+        // settings for rewind button
         btnfr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mediaPlayer.isPlaying())
                 {
                     mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-10000);
-                    Snackbar.make(v, "Reversed 10 seconds", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Reversed 10 seconds", Snackbar.LENGTH_SHORT).show();      // reverse the length of the song for 10 second
                 }
             }
         });
@@ -301,6 +303,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
 // methods for performing various actions on buttons clicked
+
+    // function for playing the music
     private void playMusic(){
         pausePlay.setBackgroundResource(R.drawable.ic_baseline_pause_circle_24);
         isPlaying = true;
@@ -312,6 +316,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     }
 
+    // function for pausing the music
     private void pauseMusic(){
         pausePlay.setBackgroundResource(R.drawable.ic_baseline_play_circle_24);
         isPlaying = false;
@@ -323,6 +328,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     }
 
+    // function for set song position the music
     public void prevNextSong(Boolean increment){
         if (increment){
             setSongPosition(true);
