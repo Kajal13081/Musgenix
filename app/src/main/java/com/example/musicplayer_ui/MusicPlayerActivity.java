@@ -5,10 +5,14 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.PackageManagerCompat;
 
+import android.Manifest;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
@@ -27,9 +31,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.musicplayer_ui.model.Songs;
+import com.gauravk.audiovisualizer.visualizer.BlastVisualizer;
+import com.gauravk.audiovisualizer.visualizer.CircleLineVisualizer;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,7 +50,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     ImageButton nextBtn, previousBtn, btnff, btnfr;
     TextView titleTv, currentTimeTv, totalTimeTv;
     SeekBar seekBar;
-
+    BlastVisualizer audioVisualizer;
     ImageView musicIcon,loop,loop_change;
 
     ImageView mHeartIcon;
@@ -59,6 +66,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     public static Runnable runnable;
     private Handler mHandler = new Handler();
     public static byte[] SongIcon;
+    private int RECORD_PERMS = 993;
 // overriding method for making menu items to respond
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -85,7 +93,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.btnnext);
         previousBtn = findViewById(R.id.btnprev);
         musicIcon = findViewById(R.id.imageview);
-        // mVisualizer = findViewById(R.id.blast);
+        audioVisualizer = findViewById(R.id.audio_visualizer);
         btnff = findViewById(R.id.btnff);
         btnfr = findViewById(R.id.btnfr);
         loop = findViewById(R.id.loop);
@@ -247,7 +255,14 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 nextBtn.performClick();
             }
         });
-
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)== PackageManager.PERMISSION_GRANTED)
+        {
+            audioVisualizer.setAudioSessionId(mediaPlayer.getAudioSessionId());
+        }
+        else
+        {
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},RECORD_PERMS);
+        }
     }
 
 
@@ -379,4 +394,26 @@ public class MusicPlayerActivity extends AppCompatActivity {
             retriever.release();
             return art;
         }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED && requestCode==RECORD_PERMS)
+        {
+            audioVisualizer.setAudioSessionId(mediaPlayer.getAudioSessionId());
+        }
+        else
+        {
+            Toast.makeText(this, "Pls give permissions :__:", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(audioVisualizer!=null)
+        {
+            audioVisualizer.release();
+        }
+    }
 }

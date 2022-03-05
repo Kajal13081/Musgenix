@@ -24,7 +24,6 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:padding="10dp"
             android:singleLine="true"
-            android:layout_marginBottom="30dp"
             android:text="Song name"
             android:textAlignment="center"
             android:textColor="#FFF"
@@ -34,19 +33,34 @@
 
         </TextView>
 
-        <ImageView
-            android:id="@+id/imageview"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginBottom="15dp"
-            android:src="@drawable/music">
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp">
+            <com.gauravk.audiovisualizer.visualizer.BlastVisualizer
+                android:id="@+id/audio_visualizer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:avType="fill"
+                app:avColor="#F3CCFA"
+                app:avSpeed="normal"/>
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="180dp"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:layout_height="180dp"
+                android:src="@drawable/music">
 
-        </ImageView>
+            </ImageView>
+
+        </FrameLayout>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <SeekBar
                 android:id="@+id/seekbar"
